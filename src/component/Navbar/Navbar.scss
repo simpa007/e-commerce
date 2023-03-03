@@ -1,0 +1,19 @@
+.container{
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+
+    .nav-link-container{
+        display: flex;
+        justify-content: space-between;
+        cursor:pointer;
+      .nav-link{
+        font-weight: 700;
+        text-decoration: none;
+        color: #000;
+      }
+        .nav-link+.nav-link{
+            margin-left: 20px;
+    }
+}
+}
