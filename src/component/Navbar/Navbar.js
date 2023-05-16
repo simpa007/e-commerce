@@ -1,12 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./Navbar.scss";
 import logo from "../../img/preview.png";
-import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Outlet, Link } from "react-router-dom";
+import { CartContext } from "../../context/cart.context";
 import { UserContext } from "../../context/user.context";
 import { signOutUser } from "../../auth/Firebase/Firebase";
+import { CartIcon } from "../CartIcon/CartIcon";
+import { CartDropdown } from "../CartDropdown/CartDropdown";
 export const Navbar = () => {
   const { currentUser } = useContext(UserContext);
+  const { isCartOpen, setIsCartOpen } = useContext(CartContext);
+
+  const toggleCartOpen = () => {
+    setIsCartOpen(!isCartOpen);
+  };
 
   return (
     <>
@@ -34,12 +41,9 @@ export const Navbar = () => {
             </Link>
           )}
 
-          <Link to="/cart" className="nav-link">
-            <span>
-              <AiOutlineShoppingCart size="35px" />
-            </span>
-          </Link>
+          <CartIcon handleClick={toggleCartOpen} />
         </div>
+        {isCartOpen && <CartDropdown />}
       </div>
       <Outlet />
     </>
